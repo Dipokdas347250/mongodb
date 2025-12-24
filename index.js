@@ -21,6 +21,25 @@ app.post('/data', async (req, res) => {
   res.status(200).json({message: "Data received", data: createTodo});
 });
 
+// read data
+
+app.get("/alltodos", async (req,res)=>{  
+
+  let alltodos = await TodoModel.find({});
+
+  res.status(200).json({success: true, message: "All todos", data: alltodos});
+
+})
+
+// delete data
+app.delete("/delete/:id", async (req,res)=>{  
+   let {id} = req.params;
+  let deletedtoto = await TodoModel.findOneAndDelete({_id:id});
+
+  res.status(200).json({success: true, message: "Todo deleted", data: deletedtoto});
+
+});
+
 // Start the server
 
 

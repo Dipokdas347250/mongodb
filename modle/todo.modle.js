@@ -3,6 +3,7 @@ const mongodb=require("mongoose");
 const todoSchema=new mongodb.Schema({
     demo:{
         type:String,
+        required:true
       
     }
    
