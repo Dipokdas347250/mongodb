@@ -4,12 +4,15 @@ const port = 3000;
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config()
 app.use(express.json());
+const cors = require('cors')
+app.use(cors());
 
 
 
 
 const dbConfig = require('./config/db.config');
 const TodoModel = require('./modle/todo.modle');
+const UserModel = require('./modle/user.modle');
 
 // Connect to the database
 dbConfig();
@@ -36,6 +39,24 @@ dbConfig();
     }
   
 });
+
+app.post('/create', async (req, res) => {
+  try {
+    let {name, email, password, age}=req.body;
+  let createTodo = new UserModel({
+    name:name,
+    email:email,
+    password:password,
+    age:age
+  })
+  await createTodo.save();
+  return res.status(200).json({message: "Data received", data: createTodo});
+    } catch (error) {
+      console.log(error);
+  res.status(500).json({message: "Internal Server Error"});
+    }
+
+})
   
 
 // read data

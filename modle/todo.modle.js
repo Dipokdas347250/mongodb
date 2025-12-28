@@ -28,6 +28,9 @@ const todoSchema=new mongodb.Schema(
    
 });
 
-const TodoModel=mongodb.model("todo",todoSchema);
+
+
+const TodoModel=mongodb.model("todo",todoSchema ,);
+
 
 module.exports=TodoModel;
